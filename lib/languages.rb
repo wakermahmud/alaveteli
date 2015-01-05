@@ -150,7 +150,7 @@ class LanguageNames
             'sl'	=> 'slovenščina',
             'so'	=> 'Soomaaliga',
             'st'	=> 'Sesotho',
-            'es'	=> 'español',
+            'es'	=> 'Español',
             'su'	=> 'Basa Sunda',
             'sw'	=> 'Kiswahili',
             'ss'	=> 'SiSwati',
