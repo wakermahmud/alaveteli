@@ -3923,3 +3923,12 @@ msgstr ""
 
 msgid "{{user}} made this {{law_used_full}} request"
 msgstr ""
+
+msgid "Your <b>Right to Know</b>"
+msgstr ""
+
+msgid "Every citizen has the right to access information held by public bodies. <b>By law, they have to respond.</b>"
+msgstr ""
+
+msgid "Find out more about"
+msgstr ""
