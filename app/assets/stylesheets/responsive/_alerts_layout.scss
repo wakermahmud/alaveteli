@@ -1,0 +1,31 @@
+
+.alert {
+  // we assume the alert is within a .row element
+  @include grid-column(12);
+  @include ie8{
+    padding-left: 0.9375em;
+    padding-right: 0.9375em;
+  }
+  position: relative;
+  margin: 0.25em 0;
+}
+
+.alert__close {
+  position: absolute;
+  display: inline-block;;
+  top: -0.25em;
+  right: 0.9375rem; // equal to the padding of .alert minus padding
+  z-index: 50;
+  padding: 0.5em;
+}
+
+.alert__content {
+    padding: 1em;
+}
+
+
+#link_box {
+  position:absolute;
+  z-index:999;
+  display:none;
+}

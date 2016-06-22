@@ -1,31 +1,46 @@
 $(document).ready(function() {
  // flash message for people coming from other countries
- if(window.location.search.substring(1).search("country_name") == -1) {
-    if (!$.cookie('has_seen_country_message')) {
-  $.ajax({
-    url: "/country_message",
-        dataType: 'html',
-        success: function(country_message){
+ var htmlWrapperFront = [
+                          '<div class="alert alert--alert alert--locality" role="alert" id="locality-alert">',
+                          ' <div class="alert__content">',
+                        ];
+ var htmlWrapperBack = [
+                          '   <a href="#top" class="alert__close js-alert__close" aria-label="close">',
+                          '     <span aria-hidden="true">&times;</span>',
+                          '   </a>',
+                          ' </div>',
+                          '</div>',
+                        ];
+var wholeMessage = '';
+if(window.location.search.substring(1).search("country_name") == -1) {
+  if (!$.cookie('has_seen_country_message')) {
+    $.ajax({
+      url: "/country_message",
+      dataType: 'html',
+      success: function(country_message){
         if (country_message != ''){
-      $('#other-country-notice .popup-content').html(country_message);
-      $('body:not(.front) #other-country-notice').show()
+          wholeMessage = htmlWrapperFront.join('') + country_message + htmlWrapperBack.join('');
+          $('#country-message').html(wholeMessage);
+          $('body:not(.front) #locality-alert').show()
         }
-    }
-      })
+      }
+    })
+  }
+}
 
-     }
- }
+ // alerts
+$('#locality-alert .js-alert__close').click(function() {
+  $('#locality-alert').hide('slow');
+  $.cookie('has_seen_country_message', 1, {expires: 365, path: '/'});
+  return false;
+});
 
- // popup messages
- $('#other-country-notice .popup-close').click(function() {
-   $('#other-country-notice').hide('slow');
-   $.cookie('has_seen_country_message', 1, {expires: 365, path: '/'});
-     });
- $('#everypage .popup-close').click(function() {
-   $('#everypage').hide('slow');
-   $.cookie('seen_foi2', 1, { expires: 7, path: '/' });
-   return false;
-   });
+$('#standard-alert .js-alert__close').click(function() {
+  $('#standard-alert').hide('slow');
+  $.cookie('seen_foi2', 1, { expires: 7, path: '/' });
+  return false;
+});
+
 
   // "link to this" widget
   $('a.link_to_this').click(function() {
@@ -54,7 +69,7 @@ $(document).ready(function() {
    })
 
    if($.cookie('seen_foi2') == 1) {
-     $('#everypage').hide();
+     //$('#standard-alert').hide();
    }
 
   // "Create widget" page
