@@ -135,6 +135,8 @@
 
       ga('create', '<%= AlaveteliConfiguration::ga_code %>', 'auto');
       ga('send', 'pageview');
+
+      <%= content_for :analytics_events %>
       </script>
     <% end %>
 

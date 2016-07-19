@@ -6,6 +6,7 @@ module AnalyticsEvent
   module Category
     WIDGET_CLICK = "Widget Clicked"
     OUTBOUND = "Outbound Link"
+    REQUEST_ACTION = "Request Action Taken"
   end
 
   module Action
@@ -16,6 +17,7 @@ module AnalyticsEvent
     WIDGET_VOTE = 'Vote'
     WIDGET_SIGNIN = 'Sign in to track'
     WIDGET_UNSUB = 'Unsubscribe'
+    NEW_REQUEST = 'New Request'
   end
 
 end

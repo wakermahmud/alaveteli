@@ -1,3 +1,7 @@
+# develop
+
+* New requests are now recorded as Google Analytics Events (Louise Crow)
+
 # Version 0.25.0.0
 
 ## Highlighted Features
