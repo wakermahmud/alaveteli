@@ -27,21 +27,7 @@ $(document).ready(function() {
    return false;
    });
 
-  // "link to this" widget
-  $('a.link_to_this').click(function() {
-    var box = $('div#link_box');
-    var location = window.location.protocol + "//" + window.location.hostname + $(this).attr('href');
-    box.width(location.length + " em");
-    box.find('input').val(location).attr('size', location.length + " em");
-    box.show();
-    box.position({
-      my: "right center",
-      at: "left bottom",
-      of:  this,
-      collision: "fit" });
-    box.find('input').select();
-    return false;
-  });
+
 
      $('.close-button').click(function() { $(this).parent().hide() });
      $('div#variety-filter a').each(function() {

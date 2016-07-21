@@ -1,4 +1,4 @@
-<div class="outgoing correspondence box" id="outgoing-<%= outgoing_message.id.to_s %>">
+<div class="outgoing correspondence" id="outgoing-<%= outgoing_message.id.to_s %>">
   <%- if not outgoing_message.user_can_view?(@user) %>
     <%= render :partial => 'request/hidden_correspondence', :locals => { :message => outgoing_message }%>
   <%- else %>
@@ -32,7 +32,15 @@
         <%= _('<strong>Warning:</strong> This message has <strong>not yet ' \
                  'been sent</strong> for an unknown reason.') %>
       <% end %>
-      <%= link_to _("Link to this"), outgoing_message_path(outgoing_message), :class => "link_to_this" %>
-    </p>
+      </p>
+
+      <div class="correspondence__footer">
+        <div class="correspondence__footer__cplink">
+          <label class="cplink__label" for="cplink__field">Link to this</label>
+          <input type="text" id="cplink__field" class="cplink__field" value="<%= request.original_url + outgoing_message_path(outgoing_message) %>">
+          <button class="cplink__button button">Copy</button>
+        </div>
+      </div>
+
   <%- end %>
 </div>

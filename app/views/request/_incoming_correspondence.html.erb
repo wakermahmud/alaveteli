@@ -1,4 +1,4 @@
-<div class="incoming correspondence box <%= incoming_message.prominence %>" id="incoming-<%=incoming_message.id.to_s%>">
+<div class="incoming correspondence <%= incoming_message.prominence %>" id="incoming-<%=incoming_message.id.to_s%>">
   <%- if not incoming_message.user_can_view?(@user) %>
     <%= render :partial => 'request/hidden_correspondence', :locals => { :message => incoming_message }%>
   <%- else %>
@@ -25,8 +25,15 @@
       <% if !@user.nil? && @user.admin_page_links? %>
         <%= link_to "Admin", edit_admin_incoming_message_path(incoming_message.id) %> |
       <% end %>
-
-      <%= link_to _("Link to this"), incoming_message_path(incoming_message), :class => "link_to_this" %>
     </p>
+
+    <div class="correspondence__footer">
+      <div class="correspondence__footer__cplink">
+        <label class="cplink__label" for="cplink__field">Link to this</label>
+        <input type="text" id="cplink__field" class="cplink__field" value="<%= request.original_url + incoming_message_path(incoming_message) %>">
+        <button class="cplink__button button">Copy</button>
+      </div>
+    </div>
+    
   <%- end %>
 </div>
