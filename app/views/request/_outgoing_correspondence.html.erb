@@ -1,24 +1,26 @@
-<div class="outgoing correspondence box" id="outgoing-<%= outgoing_message.id.to_s %>">
+<div class="outgoing correspondence" id="outgoing-<%= outgoing_message.id.to_s %>">
   <%- if not outgoing_message.user_can_view?(@user) %>
     <%= render :partial => 'request/hidden_correspondence', :locals => { :message => outgoing_message }%>
   <%- else %>
     <%= render :partial => 'request/restricted_correspondence', :locals => {:message => outgoing_message } %>
 
-    <h2>
-      <%= _("From:") %> <%= @info_request.user_name %>
-      <br>
-      <br>
+    <div class="correspondence__header">
+      <div class="correspondence__header__from">
+        <%= _("From") %> <%= @info_request.user_name %>
+        <%= simple_date(info_request_event.created_at) %>
+      </div>
+
       <% cache_if_caching_fragments("outgoing_messages/#{ outgoing_message.id }/delivery_status", :expires_in => 6.hours) do %>
         <% delivery_status = outgoing_message.delivery_status %>
         <% if delivery_status %>
+          <div class="correspondence__header__delivery-status">
           <%= link_to outgoing_message_delivery_status_path(outgoing_message), :class => "toggle-delivery-log toggle-delivery-log--#{outgoing_message.delivery_status.simple} js-toggle-delivery-log", :'data-delivery-status' => outgoing_message.delivery_status.simple do -%>
             <%= outgoing_message.delivery_status.simple.to_s.humanize -%>
+          </div>
           <% end -%>
         <% end %>
       <% end %>
-
-      <%= simple_date(info_request_event.created_at) %>
-    </h2>
+    </div>
 
     <div class="js-delivery-log-ajax-error" hidden aria-hidden="true" style="display: none; visibility: hidden;">
         <p><%= _('We couldn’t load the mail server logs for this message.') %></p>
