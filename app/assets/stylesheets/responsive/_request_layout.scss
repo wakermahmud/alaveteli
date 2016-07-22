@@ -79,46 +79,34 @@
 }
 
 .correspondence__footer__cplink {
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-flex-wrap: nowrap;
-  -ms-flex-wrap: nowrap;
-  flex-wrap: nowrap;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  -webkit-align-content: stretch;
-  -ms-flex-line-pack: stretch;
-  align-content: stretch;
-  -webkit-align-items: flex-start;
-  -ms-flex-align: start;
-  align-items: flex-start;
+  @include flexbox();
 }
 
 .cplink__label {
-  margin-right: 0.25em;
+  @include flex(0 0 auto);
+  margin-right: 0.5em;
   white-space: nowrap;
   font-size: 0.875em;
-  height: 1.875em; //match cplink_field
-  padding: 0.5em;
+  height: 2em; //match cplink_field
+  padding: 0.5em 0;
   line-height: 1em;
 }
 
 input.cplink__field {
-  flex-grow: 1;
-  height: 1.875em;
-  padding: 0.5em;
+  @include flex(1 0 8em);
+  height: 2em;
+  padding: 0 0.5em;
   margin-bottom: 0;
+  @include ie8 {
+    width: 100%;
+  }
 }
 
 .cplink__button {
+  @include flex(0 0 auto);
   padding: 0.5em;
   font-size: 0.875em;
-  height: 1.875em; //match cplink_field
+  height: 2em; //match cplink_field
   margin-bottom: 0;
   line-height: 1em;
 }
