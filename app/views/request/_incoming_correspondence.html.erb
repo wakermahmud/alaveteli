@@ -5,8 +5,9 @@
     <% end %>
 
     <% if incoming_message.from_public_body? %>
-      <%= @info_request.public_body.name %>
-    <% end %>, <%= simple_date(incoming_message.sent_at) %>
+      , <%= @info_request.public_body.name %>
+    <% end %>
+    <a class="correspondence__header__date" href="<%= incoming_message_path(incoming_message) %>"><%= simple_date(incoming_message.sent_at) %></a>
 
   </div>
   <%- if not incoming_message.user_can_view?(@user) %>
