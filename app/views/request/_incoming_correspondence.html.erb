@@ -1,14 +1,20 @@
 <div class="incoming correspondence <%= incoming_message.prominence %>" id="incoming-<%=incoming_message.id.to_s%>">
-    <div class="correspondence__header">
-    <% if incoming_message.specific_from_name? %>
-      <%= _("From") %> <%= incoming_message.safe_mail_from %>
-    <% end %>
-    <% if incoming_message.from_public_body? %>
-      , <%= @info_request.public_body.name %>
-    <% end %>
-    <a class="correspondence__header__date" href="<%= incoming_message_path(incoming_message) %>"><%= simple_date(incoming_message.sent_at) %></a>
+  <div class="correspondence__header">
+    <%= _("From") %> 
 
+    <% if incoming_message.specific_from_name? %>
+      <%= incoming_message.safe_mail_from %>,
+    <% end %>
+
+    <% if incoming_message.from_public_body? %>
+      <%= @info_request.public_body.name %>
+    <% end %>
+
+    <%= link_to incoming_message_path(incoming_message), :class => 'correspondence__header__date' do %>
+      <%= simple_date(incoming_message.sent_at) %>
+    <% end %>
   </div>
+
   <%- if not incoming_message.user_can_view?(@user) %>
     <%= render :partial => 'request/hidden_correspondence', :locals => { :message => incoming_message }%>
   <%- else %>
