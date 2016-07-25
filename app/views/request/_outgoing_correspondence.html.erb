@@ -36,9 +36,9 @@
 
       <div class="correspondence__footer">
         <div class="correspondence__footer__cplink">
-          <label class="cplink__label" for="cplink__field">Link to this</label>
+          <label class="cplink__label" for="cplink__field"><%= _('Link to this') %></label>
           <input type="text" id="cplink__field" class="cplink__field" value="<%= request.original_url + outgoing_message_path(outgoing_message) %>">
-          <button class="cplink__button button">Copy</button>
+          <button class="cplink__button button"><%= _('Copy') %></button>
         </div>
       </div>
 
