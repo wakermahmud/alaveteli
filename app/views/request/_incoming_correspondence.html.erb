@@ -1,7 +1,5 @@
 <div class="incoming correspondence <%= incoming_message.prominence %>" id="incoming-<%=incoming_message.id.to_s%>">
   <div class="correspondence__header">
-    <%= _("From") %> 
-
     <% if incoming_message.specific_from_name? %>
       <%= incoming_message.safe_mail_from %>,
     <% end %>
