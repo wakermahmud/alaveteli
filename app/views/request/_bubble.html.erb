@@ -42,8 +42,30 @@
       <% end %>
 
     </ul>
+    <a href="#" title="" id="js-attachments__show-more" class="attachments__show-more"><%= _('View all attachments') %> (<span class="js-attachment-count"></span>)</a>
   </div>
   <% end %>
 
   <p><%= body %></p>
+  <script>
+    var limit = 3;
+    var per_page = 1000; //change this to enable 'pages' (reveal per_page at a time)
+
+    jQuery('.list-of-attachments > .attachment:gt('+(limit-1)+')').hide();
+    if (jQuery('.list-of-attachments > .attachment').length <= limit) {
+        jQuery('#js-attachments__show-more').hide();
+    }
+
+    jQuery('.js-attachment-count').text((jQuery('.list-of-attachments > .attachment').length) - limit);
+
+    jQuery('#js-attachments__show-more').bind('click', function(event){
+        event.preventDefault();
+        limit += per_page;
+        jQuery('.list-of-attachments > .attachment:lt('+(limit)+')').show();
+
+        if (jQuery('.list-of-attachments > .attachment').length <= limit) {
+            jQuery(this).hide();
+        }
+    });
+</script>
 </div>
