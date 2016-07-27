@@ -81,6 +81,11 @@
   display: inline-block;
 }
 
+.attachments__footer {
+  @include respond-min( $main_menu-mobile_menu_cutoff ){
+    text-align: right;
+  }
+}
 
 /* Event history details */
 #request_details {
