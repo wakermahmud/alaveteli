@@ -1,35 +1,10 @@
 <div id="after_actions" class="after_actions">
-  <h2><%= _('Things to do with this request') %></h2>
+  <button href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="action-menu__button">Actions</button><br>
+  <ul id="drop1" data-dropdown-content class="action-menu__menu" aria-hidden="true">
 
-  <div id="anyone_actions" class="anyone_actions">
-    <strong><%= _('Anyone:') %></strong>
-
-    <ul>
-      <% if AlaveteliConfiguration.enable_annotations && @info_request.comments_allowed? %>
-        <li>
-          <%= raw(_('<a href="{{url}}">Add an annotation</a> (to help the ' \
-                      'requester or others)',
-                    :url => new_comment_url(:url_title => @info_request.url_title).html_safe)) %>
-        </li>
-      <% end %>
-
-      <% if @old_unclassified %>
-        <li>
-          <%= link_to _('Update the status of this request'), '#describe_state_form_1' %>
-        </li>
-      <% end %>
-
-      <li>
-        <%= link_to _("Download a zip file of all correspondence"), download_entire_request_path(:url_title => @info_request.url_title) %>
-      </li>
-    </ul>
-  </div>
-
-  <% if ! @info_request.is_external? %>
-    <div id="owner_actions" class="owner_actions">
-      <strong><%= _('{{info_request_user_name}} only:',:info_request_user_name=>h(@info_request.user_name)) %></strong>
-
-      <ul>
+    <% if ! @info_request.is_external? %>
+    <li class="action-menu__menu__item"><span class="action-menu__menu__role-name"><%= _('{{info_request_user_name}}',:info_request_user_name=>h(@info_request.user_name)) %></span>
+      <ul class="action-menu__menu__submenu">
         <li>
           <% if @last_response.nil? %>
             <%= link_to _("Send a followup"), new_request_followup_path(:request_id => @info_request.id, :anchor => 'followup') %>
@@ -48,16 +23,34 @@
           <%= link_to _("Request an internal review"), new_request_followup_path(:request_id => @info_request.id, :internal_review => '1', :anchor => 'followup') %>
         </li>
       </ul>
-    </div>
-  <% end %>
+    </li>
+    <% end %>
+    <li class="action-menu__menu__item"><span class="action-menu__menu__role-name"><%= _('{{public_body_name}}',:public_body_name=>h(@info_request.public_body.name) ) %></span>
+      <ul class="action-menu__menu__submenu">
+        <li>
+          <%= link_to _("Respond to request"), upload_response_path(:url_title => @info_request.url_title) %>
+        </li>
+      </ul>
+    </li>
+    <li class="action-menu__menu__item">
+      <ul class="action-menu__menu__submenu">
+        <% if AlaveteliConfiguration.enable_annotations && @info_request.comments_allowed? %>
+          <li>
+            <%= raw(_('<a href="{{url}}">Add an annotation</a>',
+                      :url => new_comment_url(:url_title => @info_request.url_title).html_safe)) %>
+          </li>
+        <% end %>
 
-  <div id="public_body_actions" class="public_body_actions">
-    <strong><%= _('{{public_body_name}} only:',:public_body_name=>h(@info_request.public_body.name) ) %> </strong>
+        <% if @old_unclassified %>
+          <li>
+            <%= link_to _('Update the status of this request'), '#describe_state_form_1' %>
+          </li>
+        <% end %>
 
-    <ul>
-      <li>
-        <%= link_to _("Respond to request"), upload_response_path(:url_title => @info_request.url_title) %>
-      </li>
-    </ul>
-  </div>
+        <li>
+          <%= link_to _("Download a zip file of all correspondence"), download_entire_request_path(:url_title => @info_request.url_title) %>
+        </li>
+      </ul>
+    </li>
+  </ul>
 </div>
