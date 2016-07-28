@@ -1,5 +1,6 @@
 <% @highlight_words ||= [] %>
 <% utm_params ||= {} %>
+<% show_date = true if local_assigns[:show_date].nil? %>
 
 <div class="request_short_listing">
   <h3 class="request_short_listing__title">
@@ -10,5 +11,8 @@
 
   <p class="request_short_listing__authority">
     <%= _('{{public_body_link_absolute}}',:public_body_link_absolute => public_body_link(info_request.public_body))%>
+    <% if show_date %>
+      <%= simple_date(info_request.created_at) %>
+    <% end %>
   </p>
 </div>
