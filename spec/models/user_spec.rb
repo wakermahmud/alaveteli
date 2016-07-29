@@ -459,6 +459,41 @@ describe User do
 
   end
 
+  describe '#destroy', :focus => true do
+
+    let(:user) { FactoryGirl.create(:user) }
+
+    it 'destroys any associated info_requests' do
+      info_request = FactoryGirl.create(:info_request, :user => user)
+      user.destroy
+      expect(InfoRequest.where(:id => info_request.id)).to be_empty
+    end
+
+    it 'destroys any associated user_info_request_sent_alerts' do
+      info_request = FactoryGirl.create(:info_request)
+      alert = user.user_info_request_sent_alerts.build(:info_request => info_request,
+                                                       :alert_type => 'overdue_1')
+      user.destroy
+      expect(UserInfoRequestSentAlert.where(:id => alert.id)).to be_empty
+    end
+
+    it 'destroys any associated post_redirects' do
+      post_redirect = PostRedirect.create(:uri => '/',
+                                          :user_id => user.id)
+      user.destroy
+      expect(PostRedirect.where(:id => post_redirect.id)).to be_empty
+    end
+
+    it 'destroys any associated track_things'
+    it 'destroys any associated comments'
+    it 'destroys any associated public_body_change_requests'
+    it 'destroys any associated profile_photos'
+    it 'destroys any associated censor_rules'
+    it 'destroys any associated info_request_batches'
+    it 'destroys any associated request_classifications'
+
+  end
+
   describe '#valid?' do
 
     context 'with require_otp' do
