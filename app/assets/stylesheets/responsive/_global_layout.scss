@@ -130,6 +130,7 @@ textarea{
 .action-menu__button {
   @include button();
   @include dropdown-button();
+  margin-bottom: 0;
 }
 
 .action-menu__menu {
@@ -145,6 +146,31 @@ textarea{
       padding: 0;
     }
   }
+}
+
+
+.drop-left.open.action-menu__menu--left {
+  margin-top: 1em;
+  text-align: left;
+  &:after {
+    right: 8px;
+    left: auto;
+    top: -14px;
+    border-color: transparent transparent #ccc  transparent;
+  }
+  &:before {
+    right: 9px;
+    left: auto;
+    top: -12px;
+    border-color: transparent transparent #fff  transparent;
+  }
+}
+
+.action-menu-position {
+  position: absolute;
+  top: 0.25em;
+  right: 1em;
+  width: 16.66667%;
 }
 
 .action-menu__menu__item {

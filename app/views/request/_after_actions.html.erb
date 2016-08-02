@@ -1,6 +1,7 @@
-<div id="after_actions" class="after_actions">
+<div id="after_actions" class="after_actions action-menu">
+
   <button href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="action-menu__button">Actions</button><br>
-  <ul id="drop1" data-dropdown-content class="action-menu__menu" aria-hidden="true">
+  <ul id="drop1" data-dropdown-content class="action-menu__menu action-menu__menu--left drop-left" aria-hidden="true">
 
     <% if ! @info_request.is_external? %>
     <li class="action-menu__menu__item"><span class="action-menu__menu__role-name"><%= _('{{info_request_user_name}}',:info_request_user_name=>h(@info_request.user_name)) %></span>
